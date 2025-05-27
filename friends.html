@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Друзі</title>
+    <link rel="stylesheet" href="friends.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="friends.html"><span class="material-icons">people</span> Друзі</a></li>
+                <li><a href="profile.html"><span class="material-icons">person</span> Мій профіль</a></li>
+                <li><a href="index.html#feed"><span class="material-icons">home</span> Стрічка</a></li>
+                <li><a href="chats.html"><span class="material-icons">chat</span> Чати</a></li>
+                <li><a href="#notifications" id="notifications-link"><span class="material-icons">notifications</span> Сповіщення (<span id="notification-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="friends-page">
+            <h2>Мої друзі</h2>
+            <ul class="friend-list">
+                <li>
+                    <a href="chats.html?id=dwayne">
+                        <img src="images/avatar2.png" alt="Дуейн Джонсон">
+                    </a>
+                    <a href="chats.html?id=dwayne">Дуейн Джонсон</a>
+                    <button class="chat-button" data-friend-id="dwayne">
+                        <span class="material-icons">send</span>
+                    </button>
+                </li>
+                <li>
+                    <a href="chats.html?id=ryan">
+                        <img src="images/avatar3.png" alt="Раян Рейнольдс">
+                    </a>
+                    <a href="chats.html?id=ryan">Раян Рейнольдс</a>
+                    <button class="chat-button" data-friend-id="ryan">
+                        <span class="material-icons">send</span>
+                    </button>
+                </li>
+                <li>
+                    <a href="chats.html?id=mark">
+                        <img src="images/avatar4.png" alt="Марк Уолберг">
+                    </a>
+                    <a href="chats.html?id=mark">Марк Уолберг</a>
+                    <button class="chat-button" data-friend-id="mark">
+                        <span class="material-icons">send</span>
+                    </button>
+                </li>
+                <li>
+                    <a href="chats.html?id=ben">
+                        <img src="images/avatar5.png" alt="Бен Аффлек">
+                    </a>
+                    <a href="chats.html?id=ben">Бен Аффлек</a>
+                    <button class="chat-button" data-friend-id="ben">
+                        <span class="material-icons">send</span>
+                    </button>
+                </li>
+                <li>
+                    <a href="chats.html?id=vin">
+                        <img src="images/avatar6.png" alt="Він Дізель">
+                    </a>
+                    <a href="chats.html?id=vin">Він Дізель</a>
+                    <button class="chat-button" data-friend-id="vin">
+                        <span class="material-icons">send</span>
+                    </button>
+                </li>
+                <li>
+                    <a href="chats.html?id=akshay">
+                        <img src="images/avatar7.png" alt="Акшай Кумар">
+                    </a>
+                    <a href="chats.html?id=akshay">Акшай Кумар</a>
+                    <button class="chat-button" data-friend-id="akshay">
+                        <span class="material-icons">send</span>
+                    </button>
+                </li>
+                <li>
+                    <a href="chats.html?id=lin">
+                        <img src="images/avatar8.png" alt="Лін-Мануель Міранда">
+                    </a>
+                    <a href="chats.html?id=lin">Лін-Мануель Міранда</a>
+                    <button class="chat-button" data-friend-id="lin">
+                        <span class="material-icons">send</span>
+                    </button>
+                </li>
+                <li>
+                    <a href="chats.html?id=will">
+                        <img src="images/avatar1.png" alt="Вілл Смітт">
+                    </a>
+                    <a href="chats.html?id=will">Вілл Смітт</a>
+                    <button class="chat-button" data-friend-id="will">
+                        <span class="material-icons">send</span>
+                    </button>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        // Додамо простий JavaScript для обробки кнопок "Написати"
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatButtons = document.querySelectorAll('.chat-button');
+
+            chatButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const friendId = this.dataset.friendId;
+                    window.location.href = `chats.html?id=${friendId}`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чати</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chats.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <header>
+       <nav>
+            <ul>
+                <li><a href="friends.html"><span class="material-icons">people</span> Друзі</a></li>
+                <li><a href="profile.html"><span class="material-icons">person</span> Мій профіль</a></li>
+                <li><a href="index.html#feed"><span class="material-icons">home</span> Стрічка</a></li>
+                <li><a href="chats.html"><span class="material-icons">chat</span> Чати</a></li>
+                <li><a href="#notifications" id="notifications-link"><span class="material-icons">notifications</span> Сповіщення (<span id="notification-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="chats-page">
+            <div class="chat-list-container">
+                <h2>Чати</h2>
+                <ul class="chat-list" id="dynamic-chat-list">
+                    </ul>
+            </div>
+
+            <div id="single-chat-window">
+                <div class="chat-header">
+                    <img src="" alt="Аватар чату" id="chat-avatar">
+                    <h2 id="chat-name">Виберіть чат</h2>
+                    <button class="close-chat-button material-icons" style="display: none;">close</button>
+                </div>
+                <div class="chat-messages" id="chat-messages">
+                    <p class="system-message"><strong>Система:</strong> Привіт! Почни чат 😊</p>
+                </div>
+                <div class="chat-input">
+                    <textarea id="chat-textarea" placeholder="Напишіть повідомлення..." rows="2"></textarea>
+                    <button id="send-button">Надіслати</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="chats.js"></script>
+</body>
+</html>

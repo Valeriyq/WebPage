@@ -1,0 +1,722 @@
+:root {
+    /* Основні кольори для акцентів - робимо їх ЯСКРАВІШИМИ та ВИРАЗНІШИМИ */
+    --primary-color: #5d406d; /* Глибокий фіолетовий */
+    --primary-light-color: #9c27b0; /* Яскравіший фіолетовий для hover */
+    --primary-dark-color: #261b5e; /* Темніший фіолетовий для елементів */
+
+    --accent-color:  #7f5b94; /* Яскравий блакитний/ціан для сильних акцентів (кнопки, посилання)
+    --accent-light-color: #4fc3f7; /* Світліший блакитний для hover ефектів */
+    /* Кольори фону та карток - ГЛИБОКІ, НАСИЧЕНІ (не чистий чорний/сірий) */
+    --background-color:#9871b8; /* Дуже глибокий темно-фіолетовий */
+    --card-background-color: #2a1a45; /* Трохи світліший, насичений фіолетовий для карток */
+    --secondary-background-color: #3b2862; /* Ще один рівень для елементів всередині карток */
+
+
+    /* Кольори тексту */
+    --text-color:#17161a; /* Світло-сірий для основного тексту */
+    --light-text-color: #a0a0a0; /* Середній сірий для другорядного тексту (дати, підписів) */
+    --header-text-color: #ffffff; /* Чисто білий для заголовків та навігації */
+    --link-color: var(--accent-color); /* Посилання використовуватимуть акцентний колір */
+
+
+    /* Кольори меж та тіні - адаптовані для темного, насиченого фону */
+    --border-color: #aba1c5; /* Темний фіолетовий для меж */
+    --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.4);
+    --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.5);
+    --shadow-strong: 0 6px 12px rgba(0, 0, 0, 0.6);
+}
+/* --- Responsive Design (загальні для всіх сторінок) --- */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column; /* На менших екранах секції стають у стовпець */
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+
+    nav ul {
+        flex-direction: column; /* Навігація стає у стовпець */
+        gap: 0.5rem;
+    }
+
+    nav ul li a {
+        display: block;
+        text-align: center;
+        padding: 0.8rem 1rem;
+    }
+
+    section {
+        padding: 1rem; /* Зменшити відступи в секціях */
+    }
+
+    .modal-content {
+        padding: 1.5rem; /* Зменшити відступи в модалках */
+    }
+
+    .friend-list { /* Адаптація для сітки друзів */
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    /* Додаємо спеціальний медіа-запит для friend-list, якщо потрібно окремо від 768px */
+    .friend-list {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Менші стовпці на малих екранах */
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul {
+        gap: 0.2rem; /* Ще менший відступ між пунктами навігації */
+    }
+
+    .post-actions {
+        flex-direction: column; /* Кнопки дій під постом стають у стовпець */
+        gap: 0.8rem;
+    }
+
+    .like-btn, .send-btn {
+        width: 100%; /* Кнопки займають повну ширину */
+        justify-content: center; /* Центруємо їх вміст */
+    }
+    /* Адаптивність для сітки друзів на 480px */
+    .friend-list {
+        grid-template-columns: 1fr; /* Один стовпець на дуже малих екранах */
+    }
+    .friend-list li img {
+        width: 60px;
+        height: 60px;
+    }
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Header & Navigation --- */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 0;
+    box-shadow: var(--shadow-medium);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+nav ul li a:hover,
+nav ul li a:focus {
+    background-color: var(--primary-dark-color);
+    transform: translateY(-2px);
+}
+
+nav ul li a .material-icons {
+    font-size: 1.3rem;
+}
+
+/* --- Main Content Layout --- */
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1.5rem;
+    gap: 2rem;
+    flex-grow: 1;
+}
+
+section {
+    background-color: var(--card-background-color);
+    padding: 1.5rem;
+    border-radius: 10px;
+    #create-post {
+    /* ... ваші існуючі стилі ... */
+   box-shadow: 6px 10 12px rgba(0, 0, 0, 0.2); /* Більш виразна тінь справа */
+};
+    flex: 1;
+    min-width: 300px;
+}
+
+/* Специфічні стилі для секцій, щоб краще розподілити простір */
+#feed {
+    flex: 2; /* Стрічка займає більше місця */
+}
+#chats, #create-post {
+    flex: 1; /* Чати та створення посту займають менше місця */
+}
+
+h2 {
+    color: white; /* Білий колір для заголовків */
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+/* --- Create Post Section --- */
+#create-post {
+    order: -1; /* Розташовуємо вище в потоці */
+}
+
+.create-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.create-post-form textarea {
+    width: 91%;
+    background-color:#9871b8;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical; /* Дозволяє змінювати висоту */
+    min-height: 80px;
+}
+.create-post-form textarea::placeholder {
+    color: #ffffff;
+}
+
+.create-post-form input[type="file"] {
+    padding: 0.5rem 0;
+}
+
+#publish-post-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: flex-end; /* Вирівнюємо кнопку справа */
+}
+
+#publish-post-btn:hover {
+    background-color: var(--primary-dark-color);
+    transform: translateY(-2px);
+}
+
+/* --- Feed Filters --- */
+.feed-filters {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.feed-filters label {
+    font-weight: bold;
+    color: var(--light-text-color);
+}
+
+.feed-filters select {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color:#282841;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+
+/* --- Post Styling (Feed Section) --- */
+.post {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--card-background-color);
+    box-shadow: var(--shadow-light);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 0.8rem;
+}
+
+.post-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-light-color);
+}
+
+.post-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-author {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.post-date {
+    font-size: 0.85rem;
+    color: var(--light-text-color);
+}
+
+.post-image {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.post-description {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.post-actions {
+    display: flex;
+    justify-content: flex-start; /* Вирівнювання кнопок по лівому краю */
+    gap: 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.like-btn, .comment-btn, .send-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-light); /* Невелика тінь */
+}
+
+.like-btn .material-icons,
+.comment-btn .material-icons,
+.send-btn .material-icons {
+    font-size: 1.2rem;
+}
+
+.like-btn:hover, .comment-btn:hover, .send-btn:hover {
+    background-color: #adb1c4; /* Темніший акцент */
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Стиль для лайкнутої кнопки */
+.like-btn.liked {
+    background-color: var(--primary-color); /* Зміна кольору при лайку */
+}
+
+.like-btn.liked .material-icons {
+    color: white; /* Колір іконки серця при лайку */
+}
+
+
+/* --- Comments Section --- */
+.comments-section {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.comment {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    background-color: var(--background-color);
+    padding: 0.7rem;
+    border-radius: 8px;
+}
+
+.comment-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0; /* Не дозволяємо стискатися */
+}
+
+.comment-author {
+    font-weight: bold;
+    color: var(--primary-dark-color);
+    margin-right: 0.3rem;
+}
+
+.comment-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.comment-input {
+    flex-grow: 1;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+.comment-submit-btn {
+    background-color: var(--primary-light-color);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.comment-submit-btn:hover {
+    background-color: var(--primary-color);
+}
+
+/* --- Chat List Styling --- */
+.chat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chat-list li {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.chat-list li:last-child {
+    border-bottom: none;
+}
+
+.chat-list li:hover {
+    background-color: var(--background-color);
+    border-radius: 5px;
+    transform: translateX(5px); /* Ефект при наведенні */
+}
+
+.chat-list li img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Круглі аватари */
+    margin-right: 1rem;
+    object-fit: cover;
+    border: 2px solid var(--primary-light-color);
+}
+
+/* --- Modal Styling --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); /* Темніший оверлей */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--card-background-color);
+    margin: auto;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: var(--shadow-strong); /* Сильніша тінь */
+    position: relative;
+    animation: fadeInScale 0.3s ease-out; /* Змінена анімація */
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.close-button {
+    color: var(--light-text-color);
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--text-color);
+    transform: rotate(90deg);
+}
+
+#friend-list {
+    list-style: none;
+    padding: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+
+#friend-list li {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Відступ між аватаром та текстом */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#friend-list li:last-child {
+    border-bottom: none;
+}
+
+#friend-list li:hover {
+    background-color: var(--background-color);
+}
+
+#friend-list li img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--primary-light-color);
+}
+
+#friend-list li label {
+    flex-grow: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#friend-list li input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-light-color);
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+#friend-list li input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+#friend-list li input[type="checkbox"]:checked::before {
+    content: '✔';
+    display: block;
+    color: white;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#send-confirm-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: block;
+    width: fit-content;
+    margin: 1.5rem auto 0;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#send-confirm-button:hover {
+    background-color: var(--primary-dark-color);
+    transform: translateY(-2px);
+}
+
+/* --- Notifications Modal --- */
+#notifications-modal .modal-content {
+    max-width: 400px;
+}
+
+#notifications-list {
+    list-style: none;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-item:hover {
+    background-color: var(--background-color);
+}
+
+.notification-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-color);
+}
+
+.notification-sender {
+    color: var(--primary-color);
+}
+
+.notification-time {
+    font-size: 0.8rem;
+    color: var(--light-text-color);
+    margin-left: auto; /* Вирівнюємо час справа */
+    flex-shrink: 0;
+}
+
+/* --- Loading Spinner --- */
+#loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: var(--light-text-color);
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    nav ul li a {
+        display: block;
+        text-align: center;
+        padding: 0.8rem 1rem;
+    }
+
+    section {
+        padding: 1rem;
+    }
+
+    .modal-content {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul {
+        gap: 0.2rem;
+    }
+
+    .post-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .like-btn, .comment-btn, .send-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    #publish-post-btn {
+        width: 100%;
+    }
+}

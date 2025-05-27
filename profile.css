@@ -1,0 +1,39 @@
+#my-profile {
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(194 164 221);
+    border-radius: 5px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.profile-info {
+    font-size: 0.9em;
+    color: #272020;
+}
+h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #5c4141;
+}
+.edit-photo-icon {
+    /* Базові стилі для іконки редагування фото */
+    color: var(--text-color); /* Або ваш primary-color */
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-left: 5px;
+    vertical-align: middle;
+    transition: color 0.2s ease-in-out;
+}
+
+.edit-photo-icon:hover {
+    color: var(--accent-color); /* Зміна кольору при наведенні */
+}

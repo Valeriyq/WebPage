@@ -1,0 +1,332 @@
+/* Включаємо ваш style.css для базових стилів */
+@import url('style.css'); 
+
+/* --- Основний макет сторінки чатів --- */
+#chats-page {
+    display: flex;
+    gap: 20px; /* Відстань між списком чатів і вікном чату */
+    padding: 20px;
+    flex-grow: 1; /* Дозволяє секції займати доступний простір */
+    max-width: 1200px; /* Обмеження ширини для великих екранів */
+    margin: 0 auto; /* Центрування на сторінці */
+}
+
+/* --- Контейнер списку чатів --- */
+.chat-list-container {
+    flex: 0 0 250px; /* Фіксована ширина для списку чатів */
+    background-color: var(--card-background-color, #ffffff); /* Використовуйте змінну з style.css або значення за замовчуванням */
+    border-right: 1px solid var(--border-color, #eee); /* Використовуйте змінну */
+    padding-right: 20px;
+    border-radius: 8px; /* Додано заокруглення */
+    box-shadow: var(--shadow-light, 0 2px 5px rgba(0,0,0,0.1)); /* Додано тінь */
+    max-height: 85vh; /* Обмеження висоти */
+    overflow-y: auto; /* Дозволяє прокрутку списку */
+}
+
+.chat-list-container h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: fffff; 
+    border-bottom: 2px solid var(--border-color, #eee);
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.chat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chat-item {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color, #f0f0f0);
+}
+
+.chat-item:last-child {
+    border-bottom: none; /* Без нижньої лінії для останнього елементу */
+}
+
+.chat-item a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-color, black); /* Використовуйте змінну */
+    padding: 8px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+
+
+.chat-item img {
+    width: 40px; /* Збільшено розмір аватара */
+    height: 40px; /* Збільшено розмір аватара */
+    border-radius: 50%;
+    margin-right: 12px;
+    object-fit: cover; /* Для кращого відображення зображень */
+    border: 2px solid var(--primary-light-color, #007bff); /* Легка рамка */
+}
+
+.chat-item span {
+    font-weight: bold;
+    font-size: 1.1em; /* Збільшено розмір тексту */
+}
+
+/* --- Вікно одного чату --- */
+#single-chat-window {
+    flex-grow: 1; /* Вікно чату займає решту доступного місця */
+    background-color: var(--card-background-color, #ffffff);
+    border: 1px solid var(--border-color, #ddd);
+    border-radius: 8px; /* Додано заокруглення */
+    box-shadow: var(--shadow-light, 0 2px 5px rgba(0,0,0,0.1));
+    display: none; /* Спочатку сховане, показується JS */
+    flex-direction: column;
+    height: 85vh; /* Фіксована висота для вікна чату */
+}
+
+.chat-header {
+    background-color: var(--primary-color, #007bff);
+    color: white;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color, #eee);
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Відстань між елементами в хедері */
+    position: relative; /* Для позиціонування кнопки закриття */
+}
+
+.chat-header img {
+    width: 50px; /* Збільшено розмір аватара */
+    height: 50px; /* Збільшено розмір аватара */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white; /* Рамка навколо аватара */
+}
+
+.chat-header h2 {
+    margin: 0;
+    font-size: 1.4em;
+    color: white;
+    border-bottom: none;
+    text-decoration: none; 
+}
+.close-chat-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem; /* Розмір іконки */
+    cursor: pointer;
+    position: absolute; /* Позиціонування відносно хедеру */
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.close-chat-button:hover {
+    color: var(--accent-color, #ffc107); /* Колір при наведенні */
+    transform: translateY(-50%) rotate(90deg); /* Анімація при наведенні */
+}
+
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto; /* Дозволяє прокрутку повідомлень */
+    background-color: var(--background-color, #f8f8f8); /* Фон повідомлень */
+    display: flex;
+    flex-direction: column; /* Щоб повідомлення йшли зверху вниз */
+    gap: 10px; /* Відстань між повідомленнями */
+}
+
+.chat-messages p {
+    margin: 0;
+    padding: 10px 15px;
+    border-radius: 18px; /* Заокруглені кути повідомлень */
+    max-width: 75%; /* Обмеження ширини повідомлень */
+    word-wrap: break-word; /* Перенесення довгих слів */
+    line-height: 1.4;
+}
+
+/* Стилі для системних повідомлень */
+.chat-messages .system-message {
+    background-color: var(--hover-color, #f0f0f0);
+    color: var(--light-text-color, #666);
+    text-align: center;
+    font-style: italic;
+    align-self: center; /* Вирівнювання по центру */
+    max-width: fit-content; /* Займає тільки потрібну ширину */
+}
+
+/* Стилі для повідомлень користувача (наші повідомлення) */
+.chat-messages .my-message {
+    background-color: var(--primary-color, #007bff);
+    color: white;
+    align-self: flex-end; /* Вирівнюємо свої повідомлення справа */
+    border-bottom-right-radius: 5px; /* Трохи гострий кут */
+}
+
+/* Стилі для повідомлень друга */
+.chat-messages .friend-message {
+    background-color: var(--border-color, #e0e0e0);
+    color: var(--text-color, #333);
+    align-self: flex-start; /* Вирівнюємо повідомлення друга зліва */
+    border-bottom-left-radius: 5px; /* Трохи гострий кут */
+}
+
+
+.chat-input {
+    padding: 15px 20px;
+    border-top: 1px solid var(--border-color, #eee);
+    display: flex;
+    gap: 10px; /* Відстань між textarea і кнопкою */
+    align-items: center;
+    background-color: var(--card-background-color, #ffffff);
+}
+
+.chat-input textarea {
+    flex-grow: 1;
+    border: 1px solid var(--border-color, #ccc);
+    border-radius: 20px; /* Більш заокруглені кути */
+    padding: 10px 15px;
+    font-family: inherit;
+    font-size: 1em;
+    resize: none; /* Забороняємо зміну розміру вручну */
+    min-height: 40px; /* Мінімальна висота */
+    max-height: 100px; /* Максимальна висота, щоб не заповнювала весь екран */
+    overflow-y: auto; /* Дозволяє прокрутку при великому тексті */
+}
+
+.chat-input button {
+    background-color: var(--primary-color, #007bff);
+    color: white;
+    border: none;
+    border-radius: 20px; /* Більш заокруглені кути */
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.chat-input button:hover {
+    background-color: var(--primary-dark-color, #0056b3);
+    transform: translateY(-2px);
+}
+
+/* Стилі для іконок Material Icons */
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+/* --- Адаптивність --- */
+@media (max-width: 768px) {
+    #chats-page {
+        flex-direction: column; /* На мобільних: список чатів і вікно чату один під одним */
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .chat-list-container {
+        flex: auto; /* Знімаємо фіксовану ширину */
+        width: 100%; /* Займає всю ширину */
+        padding-right: 15px;
+        border-right: none; /* Без правої межі */
+        border-bottom: 1px solid var(--border-color, #eee); /* Додаємо нижню межу */
+        max-height: 60vh; /* Обмеження висоти для списку */
+        margin-bottom: 10px;
+    }
+
+    /* Ховаємо список чатів, коли вікно чату відкрито на мобільних */
+    .chat-list-container.hidden-on-mobile {
+        display: none;
+    }
+
+    #single-chat-window {
+        height: 80vh; /* Збільшуємо висоту вікна чату на мобільних */
+        display: none; /* За замовчуванням приховано на мобільних */
+        flex: auto; /* Знімаємо фіксовану ширину */
+        width: 100%; /* Займає всю ширину */
+    }
+
+    /* Показуємо вікно чату, коли воно "активне" на мобільних */
+    #single-chat-window.active-on-mobile {
+        display: flex;
+    }
+
+    .close-chat-button {
+        display: block !important; /* Показуємо кнопку закриття на мобільних */
+    }
+
+    .chat-header h2 {
+        font-size: 1.2em;
+    }
+
+    .chat-messages p {
+        max-width: 90%; /* Більша ширина повідомлень на мобільних */
+        padding: 8px 12px;
+    }
+
+    .chat-input textarea {
+        font-size: 0.9em;
+        padding: 8px 12px;
+    }
+
+    .chat-input button {
+        padding: 8px 15px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-list-container {
+        padding: 10px;
+    }
+    .chat-item a {
+        padding: 5px 8px;
+    }
+    .chat-item img {
+        width: 35px;
+        height: 35px;
+    }
+    .chat-item span {
+        font-size: 1em;
+    }
+    .chat-header img {
+        width: 45px;
+        height: 45px;
+    }
+    .chat-header h2 {
+        font-size: 1.1em;
+    }
+    .close-chat-button {
+        font-size: 1.8rem;
+    }
+    .chat-messages {
+        padding: 10px;
+    }
+    .chat-input {
+        padding: 10px;
+    }
+}

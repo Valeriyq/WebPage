@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project X</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="friends.html"><span class="material-icons">people</span> Друзі</a></li>
+                <li><a href="profile.html"><span class="material-icons">person</span> Мій профіль</a></li>
+                <li><a href="#feed"><span class="material-icons">home</span> Стрічка</a></li>
+                <li><a href="chats.html"><span class="material-icons">chat</span> Чати</a></li>
+                <li><a href="#notifications" id="notifications-link"><span class="material-icons">notifications</span> Сповіщення (<span id="notification-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+    <main>
+        <section id="create-post">
+            <h2>Створити новий пост</h2>
+            <div class="create-post-form">
+                <textarea id="post-text" placeholder="Що у вас нового?"></textarea>
+                <input type="file" id="post-image" accept="image/*">
+                <button id="publish-post-btn">Опублікувати</button>
+            </div>
+        </section>
+
+        <section id="feed">
+            <h2>Стрічка </h2>
+            <div class="feed-filters">
+                <label for="filter-select">Фільтрувати:</label>
+                <select id="filter-select">
+                    <option value="all">Всі пости</option>
+                    <option value="popular">Популярні</option>
+                    <option value="newest">Новіші</option>
+                </select>
+            </div>
+
+            <div id="posts-container">
+                <div class="post" data-post-id="1">
+                    <div class="post-header">
+                        <img src="images/avatar2.png" alt="Аватар Дуейна Джонсона" class="post-avatar">
+                        <div class="post-info">
+                            <span class="post-author">Дуейн Джонсон</span>
+                            <span class="post-date">1 годину тому</span>
+                        </div>
+                    </div>
+                    <img src="images/img1.png" alt="Пост Дуейна Джонсона" class="post-image">
+                    <p class="post-description">Чудовий день для прогулянки!</p>
+                    <div class="post-actions">
+                        <button class="like-btn" data-likes="15">
+                            <span class="material-icons">favorite_border</span> Лайк (<span class="like-count">15</span>)
+                        </button>
+                        <button class="comment-btn">
+                            <span class="material-icons">comment</span> Коментувати
+                        </button>
+                        <button class="send-btn" data-post-id="1" aria-label="Поширити допис">
+                            <span class="material-icons">send</span>
+                        </button>
+                    </div>
+                    <div class="comments-section" style="display: none;">
+                        <div class="comment">
+                            <img src="images/avatar1.png" alt="Аватар коментатора" class="comment-avatar">
+                            <span class="comment-author">Вілл Смітт:</span> Круто!
+                        </div>
+                        <form class="comment-form">
+                            <input type="text" placeholder="Напишіть коментар..." class="comment-input">
+                            <button type="submit" class="comment-submit-btn">Опублікувати</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="post" data-post-id="2">
+                    <div class="post-header">
+                        <img src="images/avatar3.png" alt="Аватар Раяна Рейнольдса" class="post-avatar">
+                        <div class="post-info">
+                            <span class="post-author">Раян Рейнольдс</span>
+                            <span class="post-date">3 години тому</span>
+                        </div>
+                    </div>
+                    <img src="images/img2.png" alt="Пост Раяна Рейнольдса" class="post-image">
+                    <p class="post-description">Тренування пройшло успішно! #фітнес</p>
+                    <div class="post-actions">
+                        <button class="like-btn" data-likes="22">
+                            <span class="material-icons">favorite_border</span> Лайк (<span class="like-count">22</span>)
+                        </button>
+                        <button class="comment-btn">
+                            <span class="material-icons">comment</span> Коментувати
+                        </button>
+                        <button class="send-btn" data-post-id="2" aria-label="Поширити допис">
+                            <span class="material-icons">send</span>
+                        </button>
+                    </div>
+                    <div class="comments-section" style="display: none;">
+                        <form class="comment-form">
+                            <input type="text" placeholder="Напишіть коментар..." class="comment-input">
+                            <button type="submit" class="comment-submit-btn">Опублікувати</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="post" data-post-id="3">
+                    <div class="post-header">
+                        <img src="images/avatar4.png" alt="Аватар Марка Уолберга" class="post-avatar">
+                        <div class="post-info">
+                            <span class="post-author">Марк Уолберг</span>
+                            <span class="post-date">Вчора</span>
+                        </div>
+                    </div>
+                    <img src="images/img3.png" alt="Пост Марка Уолберга" class="post-image">
+                    <p class="post-description">Новий проект на горизонті!</p>
+                    <div class="post-actions">
+                        <button class="like-btn" data-likes="8">
+                            <span class="material-icons">favorite_border</span> Лайк (<span class="like-count">8</span>)
+                        </button>
+                        <button class="comment-btn">
+                            <span class="material-icons">comment</span> Коментувати
+                        </button>
+                        <button class="send-btn" data-post-id="3" aria-label="Поширити допис">
+                            <span class="material-icons">send</span>
+                        </button>
+                    </div>
+                    <div class="comments-section" style="display: none;">
+                        <form class="comment-form">
+                            <input type="text" placeholder="Напишіть коментар..." class="comment-input">
+                            <button type="submit" class="comment-submit-btn">Опублікувати</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="post" data-post-id="4">
+                    <div class="post-header">
+                        <img src="images/avatar5.png" alt="Аватар Бена Аффлека" class="post-avatar">
+                        <div class="post-info">
+                            <span class="post-author">Бен Аффлек</span>
+                            <span class="post-date">2 дні тому</span>
+                        </div>
+                    </div>
+                    <img src="images/img4.png" alt="Пост Бена Аффлека" class="post-image">
+                    <p class="post-description">Насолоджуйтесь моментом)</p>
+                    <div class="post-actions">
+                        <button class="like-btn" data-likes="30">
+                            <span class="material-icons">favorite_border</span> Лайк (<span class="like-count">30</span>)
+                        </button>
+                        <button class="comment-btn">
+                            <span class="material-icons">comment</span> Коментувати
+                        </button>
+                        <button class="send-btn" data-post-id="4" aria-label="Поширити допис">
+                            <span class="material-icons">send</span>
+                        </button>
+                    </div>
+                    <div class="comments-section" style="display: none;">
+                        <div class="comment">
+                            <img src="images/avatar1.png" alt="Аватар коментатора" class="comment-avatar">
+                            <span class="comment-author">Вілл Смітт:</span> Виглядає чудово!
+                        </div>
+                        <form class="comment-form">
+                            <input type="text" placeholder="Напишіть коментар..." class="comment-input">
+                            <button type="submit" class="comment-submit-btn">Опублікувати</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loading-spinner" style="display: none;">
+                <div class="spinner"></div>
+                <p>Loading...</p>
+            </div>
+
+        </section>
+
+        <section id="chats">
+            <h2>Чати</h2>
+            <ul class="chat-list">
+                <li data-friend-id="dwayne"><img src="images/avatar2.png" alt="Дуейн Джонсон"> Дуейн Джонсон</li>
+                <li data-friend-id="ryan"><img src="images/avatar3.png" alt="Раян Рейнольдс"> Раян Рейнольдс</li>
+                <li data-friend-id="mark"><img src="images/avatar4.png" alt="Марк Уолберг"> Марк Уолберг</li>
+                <li data-friend-id="ben"><img src="images/avatar5.png" alt="Бен Аффлек"> Бен Аффлек</li>
+                <li data-friend-id="vin"><img src="images/avatar6.png" alt="Він Дізель"> Він Дізель</li>
+                <li data-friend-id="akshay"><img src="images/avatar7.png" alt="Акшай Кумар"> Акшай Кумар</li>
+                <li data-friend-id="lin"><img src="images/avatar8.png" alt="Лін-Мануель Міранда"> Лін-Мануель Міранда</li>
+                <li data-friend-id="will"><img src="images/avatar1.png" alt="Вілл Смітт"> Вілл Смітт</li>
+            </ul>
+        </section>
+    </main>
+
+    <div id="send-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Відправити другу</h3>
+            <ul id="friend-list">
+                </ul>
+            <button id="send-confirm-button">Відправити</button>
+        </div>
+    </div>
+
+    <div id="notifications-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Ваші сповіщення</h3>
+            <ul id="notifications-list">
+                <li class="notification-item">
+                    <img src="images/avatar2.png" alt="Дуейн Джонсон" class="notification-avatar">
+                    <p><strong class="notification-sender">Дуейн Джонсон</strong> лайкнув ваш пост.</p>
+                    <span class="notification-time">5 хв тому</span>
+                </li>
+                 <li class="notification-item">
+                    <img src="images/avatar3.png" alt="Раян Рейнольдс" class="notification-avatar">
+                    <p><strong class="notification-sender">Раян Рейнольдс</strong> прокоментував ваш пост: "Круто!"</p>
+                    <span class="notification-time">10 хв тому</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="skript.js"></script>
+</body>
+</html>
